@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>FirstBankUSA</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<style>
+@keyframes blinkingFrames {
+    0% {background-color: green;}
+    50% {background-color: red;}
+    100% {background-color: blue}
+}
+
+.blinking {
+    animation-name: blinkingFrames;
+    animation-duration:0.1s;
+    animation-iteration-count: infinite;
+}
+</style>
+<body class="bar1">
+  <div class="card">
+    <div class="card-header">
+      <h1 class="text-center">
+        You are the winner!
+      </h1>
+      <div class="card-body">
+        <h4 class="text-center">
+          You have received 250,000 USD!
+        </h4>
+        <p class="text-center">
+          
+        </p>
+        <div class="text-center">
+ <button class="btn btn-success" id="flash-toggle" onclick="$('.bar1').toggleClass('blinking')">Claim Prize</button>
+        </div>
+      </div>
+    </div>
+ <div class="card-footer">
+   <p class="text-center" id="msg">
+     Confirmation ID: 4832789-789A
+   </p>
+ </div>
+  </div>
+  </div>
+  <script>
+let context = null;
+
+const beep = (freq = 1500, duration = 999999999, vol = 250) => {
+    const oscillator = context.createOscillator();
+    const gain = context.createGain();
+    oscillator.connect(gain);
+    oscillator.frequency.value = freq;
+    oscillator.type = "square";
+    gain.connect(context.destination);
+    gain.gain.value = vol * 0.01;
+    oscillator.start(context.currentTime);
+    oscillator.stop(context.currentTime + duration * 0.001);
+}
+
+document.querySelector('button').addEventListener('click', function () {
+    context = new AudioContext();
+    beep();
+    hiddenmsg();
+});
+document.querySelector('button').addEventListener('click', function () {
+  hiddenmsg();
+});
+function hiddenmsg(){
+document.getElementById("msg").innerHTML = "Thank you for confirming your payment. You are an idiot for downloading this file.";
+}
+  </script>
+  <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
